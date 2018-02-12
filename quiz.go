@@ -48,17 +48,6 @@ func (q *Quiz) Store(name []byte) error {
 	return DBPut(name, q.Hash(), q.Bytes())
 }
 
-func NewQuiz(name, data []byte) *Quiz {
-	q := new(Quiz)
-	json.Unmarshal(data, q)
-	if q.Valid() && !q.Completion() {
-		if b := DBGet(name, q.Hash()); len(b) != 0 {
-			json.Unmarshal(b, q)
-		}
-	}
-	return q
-}
-
 func GetQuiz(name []byte, question string) *Quiz {
 	q := new(Quiz)
 	if question = strings.TrimSpace(question); question == "" {
@@ -70,4 +59,19 @@ func GetQuiz(name []byte, question string) *Quiz {
 		json.Unmarshal(b, q)
 	}
 	return q
+}
+
+func ParseQuiz(name, data []byte) *Quiz {
+	q := new(Quiz)
+	json.Unmarshal(data, q)
+	if q.Valid() && !q.Completion() {
+		if b := DBGet(name, q.Hash()); len(b) != 0 {
+			json.Unmarshal(b, q)
+		}
+	}
+	return q
+}
+
+func NewQuiz(question string) *Quiz {
+	return &Quiz{Question: question}
 }
