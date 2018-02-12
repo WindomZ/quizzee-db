@@ -7,6 +7,7 @@ import (
 )
 
 func TestParseQuiz(t *testing.T) {
+	Open("./data/test.db")
 	demo.Update = 0
 	q := ParseQuiz(demoName, demo.Bytes())
 	assert.True(t, q.Completion())
@@ -21,4 +22,8 @@ func TestNewQuiz(t *testing.T) {
 	assert.True(t, q.Valid())
 	q.trim()
 	assert.False(t, q.Valid())
+}
+
+func TestClose2(t *testing.T) {
+	assert.NoError(t, Close())
 }

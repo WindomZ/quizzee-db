@@ -16,15 +16,26 @@ var demo = &Quiz{
 }
 
 func init() {
-	DBRegister(demoName)
+	Open("./data/test.db")
+	Register(demoName)
 }
 
-func TestDBPut(t *testing.T) {
+func TestOpen(t *testing.T) {
+	assert.NoError(t, Close())
+	assert.NoError(t, Close())
+	assert.NoError(t, Open("./data/test.db"))
+}
+
+func TestRegister(t *testing.T) {
+	assert.NoError(t, Register(demoName))
+}
+
+func TestPut(t *testing.T) {
 	assert.True(t, demo.Completion())
 	assert.NoError(t, demo.Store(demoName))
 }
 
-func TestDBGet(t *testing.T) {
+func TestGet(t *testing.T) {
 	q := GetQuiz(demoName, "   十万个为什么？  ")
 	assert.True(t, q.Completion())
 	assert.Equal(t, demo.Question, q.Question)
@@ -33,6 +44,10 @@ func TestDBGet(t *testing.T) {
 	assert.NotEmpty(t, q.Update)
 }
 
-func TestDBCount(t *testing.T) {
-	assert.Equal(t, 1, DBCount(demoName))
+func TestCount(t *testing.T) {
+	assert.Equal(t, 1, Count(demoName))
+}
+
+func TestClose(t *testing.T) {
+	assert.NoError(t, Close())
 }

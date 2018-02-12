@@ -7,11 +7,11 @@ import (
 )
 
 func TestTrimQuestion(t *testing.T) {
-	assert.Equal(t, "简化问题", TrimQuestion("1. 简化问题？"))
-	assert.Equal(t, "简化问题", TrimQuestion("1. 简化问题?"))
-	assert.Equal(t, "简化问题", TrimQuestion("1. 简化问题"))
-	assert.Equal(t, "简化问题", TrimQuestion("1.简化问题"))
-	assert.Equal(t, "简化问题", TrimQuestion("1.简化问题？"))
-	assert.Equal(t, "简化问题", TrimQuestion("1.简化问题?"))
-	assert.Equal(t, "简化问题", TrimQuestion("简化问题？"))
+	assert.Equal(t, "内容", TrimQuestion("1. 内容？"))
+	assert.Equal(t, "内容", TrimQuestion("1. 内容?"))
+	assert.Equal(t, "内容", TrimQuestion("1. 内容"))
+	assert.Equal(t, "内容", TrimQuestion("1.内容"))
+	assert.Equal(t, "内容", TrimQuestion("1.内容？"))
+	assert.Equal(t, "内容", TrimQuestion("1.内容?"))
+	assert.Equal(t, "内容", TrimQuestion("内容？"))
 }

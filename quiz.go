@@ -45,7 +45,7 @@ func (q *Quiz) Store(name []byte) error {
 		return fmt.Errorf("invalid quiz")
 	}
 	q.Update = time.Now().Unix()
-	return DBPut(name, q.Hash(), q.Bytes())
+	return Put(name, q.Hash(), q.Bytes())
 }
 
 func GetQuiz(name []byte, question string) *Quiz {
@@ -55,7 +55,7 @@ func GetQuiz(name []byte, question string) *Quiz {
 	}
 
 	q.Question = question
-	if b := DBGet(name, q.Hash()); len(b) != 0 {
+	if b := Get(name, q.Hash()); len(b) != 0 {
 		json.Unmarshal(b, q)
 	}
 	return q
@@ -65,7 +65,7 @@ func ParseQuiz(name, data []byte) *Quiz {
 	q := new(Quiz)
 	json.Unmarshal(data, q)
 	if q.Valid() && !q.Completion() {
-		if b := DBGet(name, q.Hash()); len(b) != 0 {
+		if b := Get(name, q.Hash()); len(b) != 0 {
 			json.Unmarshal(b, q)
 		}
 	}
