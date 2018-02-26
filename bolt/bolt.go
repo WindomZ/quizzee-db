@@ -72,7 +72,7 @@ func (db *DB) Count(table []byte) (i int) {
 		}
 		return nil
 	})
-	return i
+	return
 }
 
 func init() {
