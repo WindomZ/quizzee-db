@@ -39,33 +39,33 @@ func (q Quiz) Bytes() []byte {
 	return b
 }
 
-func (q *Quiz) Store(name []byte) error {
+func (q *Quiz) Store() error {
 	q.trim()
 	if !q.Completion() {
 		return fmt.Errorf("invalid quiz")
 	}
 	q.Update = time.Now().Unix()
-	return Put(name, q.Hash(), q.Bytes())
+	return Put(q.Hash(), q.Bytes())
 }
 
-func GetQuiz(name []byte, question string) *Quiz {
+func GetQuiz(question string) *Quiz {
 	q := new(Quiz)
 	if question = strings.TrimSpace(question); question == "" {
 		return q
 	}
 
 	q.Question = question
-	if b := Get(name, q.Hash()); len(b) != 0 {
+	if b := Get(q.Hash()); len(b) != 0 {
 		json.Unmarshal(b, q)
 	}
 	return q
 }
 
-func ParseQuiz(name, data []byte) *Quiz {
+func ParseQuiz(data []byte) *Quiz {
 	q := new(Quiz)
 	json.Unmarshal(data, q)
 	if q.Valid() && !q.Completion() {
-		if b := Get(name, q.Hash()); len(b) != 0 {
+		if b := Get(q.Hash()); len(b) != 0 {
 			json.Unmarshal(b, q)
 		}
 	}

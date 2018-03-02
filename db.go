@@ -10,14 +10,14 @@ func Close() error {
 	return gkv.Close()
 }
 
-func Put(table, key, value []byte) error {
-	return gkv.Put(table, key, value)
+func Put(key, value []byte) error {
+	return gkv.Put(key, value)
 }
 
-func Get(table, key []byte) []byte {
-	return gkv.Get(table, key)
+func Get(key []byte) []byte {
+	return gkv.Get(key)
 }
 
-func Count(table []byte) int {
-	return gkv.Count(table)
+func Count([]byte) int {
+	return gkv.Count()
 }

@@ -28,11 +28,11 @@ func TestOpen(t *testing.T) {
 
 func TestPut(t *testing.T) {
 	assert.True(t, demo.Completion())
-	assert.NoError(t, demo.Store(demoTable))
+	assert.NoError(t, demo.Store())
 }
 
 func TestGet(t *testing.T) {
-	q := quiz.GetQuiz(demoTable, "   十万个为什么？  ")
+	q := quiz.GetQuiz("   十万个为什么？  ")
 	assert.True(t, q.Completion())
 	assert.Equal(t, demo.Question, q.Question)
 	assert.Equal(t, demo.Options, q.Options)
@@ -42,7 +42,7 @@ func TestGet(t *testing.T) {
 
 func TestParseQuiz(t *testing.T) {
 	demo.Update = 0
-	q := quiz.ParseQuiz(demoTable, demo.Bytes())
+	q := quiz.ParseQuiz(demo.Bytes())
 	assert.True(t, q.Completion())
 	assert.Equal(t, demo.Question, q.Question)
 	assert.Equal(t, demo.Options, q.Options)
