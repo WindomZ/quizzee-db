@@ -1,4 +1,4 @@
-package bolt
+package sqlite
 
 import (
 	"testing"
@@ -17,12 +17,12 @@ var demo = &quiz.Quiz{
 }
 
 func init() {
-	quiz.Open(demoTable, "../data/bolt.db")
+	quiz.Open(demoTable, "../data/sqlite.db")
 }
 
 func TestOpen(t *testing.T) {
 	assert.NoError(t, quiz.Close())
-	assert.NoError(t, quiz.Open(demoTable, "../data/bolt.db"))
+	assert.NoError(t, quiz.Open(demoTable, "../data/sqlite.db"))
 }
 
 func TestPut(t *testing.T) {
