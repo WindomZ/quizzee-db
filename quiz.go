@@ -25,6 +25,9 @@ func (q Quiz) Completion() bool {
 
 func (q *Quiz) trim() {
 	q.Question = strings.TrimSpace(q.Question)
+	for i, opt := range q.Options {
+		q.Options[i] = strings.TrimSpace(opt)
+	}
 	q.Answer = strings.TrimSpace(q.Answer)
 }
 

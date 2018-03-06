@@ -7,13 +7,20 @@ import (
 	"github.com/WindomZ/testify/assert"
 )
 
-var demoTable = []byte("test_question")
+var demoTable = []byte("test")
 var demo = &quiz.Quiz{
-	Question: "十万个为什么？",
+	Question: "   何为四方？  ",
+	Options: []string{
+		"东1a", " 南南2b", " 西西西3c ", " 北北北北4d ",
+	},
+	Answer: " 北北北北4d",
+}
+var correct = &quiz.Quiz{
+	Question: "何为四方？",
 	Options: []string{
 		"东1a", "南南2b", "西西西3c", "北北北北4d",
 	},
-	Answer: "中",
+	Answer: "北北北北4d",
 }
 
 func init() {
@@ -31,11 +38,11 @@ func TestPut(t *testing.T) {
 }
 
 func TestGet(t *testing.T) {
-	q := quiz.GetQuiz("   十万个为什么？  ")
+	q := quiz.GetQuiz(correct.Question)
 	assert.True(t, q.Completion())
-	assert.Equal(t, demo.Question, q.Question)
-	assert.Equal(t, demo.Options, q.Options)
-	assert.Equal(t, demo.Answer, q.Answer)
+	assert.Equal(t, correct.Question, q.Question)
+	assert.Equal(t, correct.Options, q.Options)
+	assert.Equal(t, correct.Answer, q.Answer)
 	assert.NotEmpty(t, q.Update)
 }
 
