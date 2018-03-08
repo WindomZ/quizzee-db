@@ -57,7 +57,18 @@ func TestParseQuiz(t *testing.T) {
 }
 
 func TestCount(t *testing.T) {
-	assert.Equal(t, 1, quiz.Count(demoTable))
+	assert.Equal(t, 1, quiz.Count())
+}
+
+func TestIterator(t *testing.T) {
+	cnt := 0
+	assert.NoError(t, quiz.Iterator(func(q *quiz.Quiz) bool {
+		cnt++
+		return assert.Equal(t, correct.Question, q.Question) &&
+			assert.Equal(t, correct.Options, q.Options) &&
+			assert.Equal(t, correct.Answer, q.Answer)
+	}))
+	assert.Equal(t, 1, cnt)
 }
 
 func TestClose(t *testing.T) {
