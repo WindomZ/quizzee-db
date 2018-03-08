@@ -9,7 +9,7 @@
 - [x] 5种嵌入式[`数据库`](#database)支持
 
 ## Usage
-可参照该[方案](https://github.com/WindomZ/quizzee/blob/master/quizzeer/common.go)用法，简单明了
+可参照[example](https://github.com/WindomZ/quizzee-db/blob/master/example/main.go)用法，简单明了
 
 ## Database
 详见[WindomZ/gkv](https://github.com/WindomZ/gkv) - 核心库支持
